@@ -40,3 +40,5 @@ export NVS_HOME="$HOME/.nvs"
 export PATH="$(yarn global bin):$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 eval $(thefuck --alias)
+
+source ~/.zsh/history
