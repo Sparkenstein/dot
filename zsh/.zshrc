@@ -7,20 +7,9 @@ export SPRK_API_KEY=""
 export TERM=linux
 source ~/.zsh/antigen
 
-antigen use oh-my-zsh
+# Antigen plugins
+source ~/.zsh/antigenrc
 
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle git
-antigen bundle chrissicool/zsh-256color
-# antigen bundle lein
-antigen bundle command-not-found
-antigen bundle autojump
-antigen bundle npm
-
-# antigen theme iplaces/astro-zsh-theme
-antigen theme geometry-zsh/geometry
-
-antigen apply
 
 export PATH="$PATH:/home/spark/bin/"
 export PATH="$PATH:/home/spark/Downloads/flutter/bin/"
