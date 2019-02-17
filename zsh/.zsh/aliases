@@ -1,0 +1,6 @@
+alias code="vscodium . && exit"
+alias xsrch="xbps-query -Rs"
+alias xget="sudo xbps-install"
+alias xrem="sudo xbps-remove"
+alias xremf="sudo xbps-remove -R"
+alias scrot='scrot ~/Pictures/Screenshots/%b%d::%H%M%S.png'
