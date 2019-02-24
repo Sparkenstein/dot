@@ -10,6 +10,7 @@ antigen bundle autojump
 antigen bundle npm
 
 # antigen theme iplaces/astro-zsh-theme
-antigen theme geometry-zsh/geometry
+# antigen theme geometry-zsh/geometry
+antigen theme PatTheMav/minimal2
 
 antigen apply
