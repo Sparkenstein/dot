@@ -1,0 +1,16 @@
+rofi.theme: /usr/share/rofi/themes/Pop-Dark.rasi
+
+rofi.color-enabled     : true
+rofi.fake-transparency : false
+rofi.font              : Roboto Mono for Powerline 14
+rofi.columns           : 1
+rofi.separator-style   : none
+rofi.hide-scrollbar    : true
+# rofi.location          : 1
+# rofi.yoffset           : 20
+# rofi.xoffset           : 500 
+rofi.padding           : 24
+rofi.fullscreen        : false
+# rofi.width             : 500
+rofi.lines             : 12 
+
