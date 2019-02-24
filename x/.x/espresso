@@ -1,0 +1,37 @@
+! special
+
+#define fg      #f5f8f6
+#define bg      #2f343f
+!*.cursorColor: #dc8cc3
+
+! black
+#define blk     #5b4848
+#define bblk    #736060
+
+! red
+#define red     #cb6077
+#define bred    #e3788f
+
+! green
+#define grn     #bec55b
+#define bgrn    #d6ed73
+
+! yellow
+#define ylw     #e4bc87
+#define bylw    #fcd49f
+
+! blue
+#define blu     #8ab3d5
+#define bblue   #a2cbed
+
+! magenta
+#define mag     #a89bb9
+#define bmag    #c0b3d1
+
+! cyan
+#define cyn     #7bcdb4
+#define ccyn    #93e5cc
+
+! white
+#define wht     #e0d8d6
+#define bwht    #f8f0ee
