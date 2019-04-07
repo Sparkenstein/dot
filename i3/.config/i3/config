@@ -202,7 +202,6 @@ assign [class="(?i)(?:urxvt)"]          → $WS3
 assign [class="(?i)(?:xfce4-terminal)"] → $WS3
 assign [class="(?i)(?:telegram)"]       → $WS4
 
-
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="GParted"] floating enable border normal
