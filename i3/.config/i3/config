@@ -39,7 +39,7 @@ floating_modifier $mod
 
 # start a terminal
 # bindsym $mod+Return exec terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec xfce4-terminal 
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -196,10 +196,12 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open specific window to specific workspace
-assign [class="(?i)(?:firefox)"]     → $WS1
-assign [class="(?i)(?:vscodium)"]    → $WS2
-assign [class="(?i)(?:thunar)"]      → $WS3
-assign [class="(?i)(?:telegram)"]    → $WS4
+assign [class="(?i)(?:firefox)"]       → $WS1
+assign [class="(?i)(?:vscodium)"]      → $WS2
+assign [class="(?i)(?:urxvt)"]         → $WS3
+assign [class="(?i)(?:xfce4-terminal)"] → $WS4
+assign [class="(?i)(?:telegram)"]      → $WS4
+
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
