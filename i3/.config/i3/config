@@ -28,6 +28,7 @@ exec --no-startup-id betterlockscreen -w dim
 bindsym $mod+u border none
 bindsym $mod+y border pixel 1
 bindsym $mod+n border normal
+bindsym $mod+p exec flameshot gui -c
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -75,10 +76,12 @@ bindsym $mod+F5 exec terminal -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b --respect-prop-shadow --config /home/user/.compton.conf
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym Print exec --no-startup-id i3-scrot
 bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+bindsym Print --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
+bindsym Shift+Print exec "scrot /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
+
 
 focus_follows_mouse yes
 
@@ -120,9 +123,9 @@ bindsym $mod+q split toggle
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+s layout stacking;exec notify-send 'layout stacking'
+bindsym $mod+w layout tabbed;exec notify-send 'layout tabbed'
+bindsym $mod+e layout toggle split;exec notify-send 'toggle split'
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -202,35 +205,10 @@ assign [title="Slack"] $ws4
 assign [title="Chromium"] $ws2
 
 # Open specific applications in floating mode
-for_window [title="Slack"] floating enable
-for_window [title="DevDocs"] move to scratchpad
 for_window [title="alsamixer"] floating enable border pixel 1
-for_window [class="Calamares"] floating enable border normal
-for_window [class="Clipgrab"] floating enable
-for_window [title="File Transfer*"] floating enable
-for_window [class="Galculator"] floating enable border pixel 1
 for_window [class="GParted"] floating enable border normal
-for_window [title="i3_help"] floating enable sticky enable border normal
-for_window [class="Lightdm-gtk-greeter-settings"] floating enable
-for_window [class="Lxappearance"] floating enable sticky enable border normal
-for_window [class="Manjaro-hello"] floating enable
-for_window [class="Manjaro Settings Manager"] floating enable border normal
-for_window [title="MuseScore: Play Panel"] floating enable
 for_window [class="Nitrogen"] floating enable sticky enable border normal
-for_window [class="Oblogout"] fullscreen enable
-for_window [class="octopi"] floating enable
-for_window [title="About Pale Moon"] floating enable
-for_window [class="Pamac-manager"] floating enable
 for_window [class="Pavucontrol"] floating enable
-for_window [class="qt5ct"] floating enable sticky enable border normal
-for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
-for_window [class="Simple-scan"] floating enable border normal
-for_window [class="(?i)System-config-printer.py"] floating enable border normal
-for_window [class="Skype"] floating enable border normal
-for_window [class="Thus"] floating enable border normal
-for_window [class="Timeset-gui"] floating enable border normal
-for_window [class="(?i)virtualbox"] floating enable border normal
-for_window [class="Xfburn"] floating enable
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -289,28 +267,7 @@ mode "resize" {
 bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1; compton -b --respect-prop-shadow --config $HOME/.compton.conf
-exec --no-startup-id nm-applet
-exec --no-startup-id xfce4-power-manager
-exec --no-startup-id pamac-tray
-exec --no-startup-id clipit
-exec --no-startup-id udiskie -a
-# exec --no-startup-id blueman
-# exec_always --no-startup-id sbxkb
-exec --no-startup-id xautolock -time 10 -locker blurlock
-exec_always --no-startup-id fix_xcursor
-# exec_always --no-startup-id ~/bin/launch.sh &
-
-# Theme colors
-# class                 border  backgr. text    indic.  child_border
-# client.focused          #808280 #808280 #80FFF9 #FDF6E3
-# client.focused_inactive #434745 #434745 #16A085 #454948
-# client.unfocused        #434745 #434745 #16A085 #454948
-# client.urgent           #CB4B16 #FDF6E3 #16A085 #268BD2
-# client.placeholder      #000000 #0c0c0c #ffffff #000000 #0c0c0c
-
-# client.background       #2B2C2B
+exec_always --no-startup-id ~/bin/launch.sh &
 
 
 #############################
