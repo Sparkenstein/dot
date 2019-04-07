@@ -6,6 +6,7 @@ export PATH="$PATH:/home/spark/bin/"
 export PATH="$PATH:/home/spark/Downloads/flutter/bin/"
 # export PATH="$PATH:/home/spark/Android/Sdk/platform-tools"
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+export PATH=$PATH:/snap/bin
 export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/isl@0.18/lib"
 export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/isl@0.18/include"
 
