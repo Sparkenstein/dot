@@ -14,6 +14,8 @@ Plug 'sheerun/vim-polyglot'
 
 Plug 'rust-lang/rust.vim'
 
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+
 call plug#end()
 
 
