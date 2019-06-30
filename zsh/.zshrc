@@ -15,3 +15,4 @@ source ~/.zsh/history
 
 # Helper Functions
 source ~/.zsh/helpers.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

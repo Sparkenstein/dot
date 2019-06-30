@@ -46,5 +46,5 @@ exec i3
 # ...or the Window Manager of your choice
 
 
-polybar example &
+sleep 2 && polybar example &
 
