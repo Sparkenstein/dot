@@ -325,6 +325,29 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-# bar {
-   # status_command i3status
-# }
+set $bg-color            #005777
+set $inactive-bg-color   #201f2f
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+set $indicator          #201f2f
+set $bar-1 "#0b0a16"
+set $bar-2 "#ffffff"
+
+
+bar {
+	font pango:Fira Code, FontAwesome 11
+	strip_workspace_numbers yes
+	position top 
+	status_command i3status-rs ~/.config/i3/status.toml
+	colors {
+		background $bar-1
+		separator $bar-1
+
+                #                  border             background         text
+		focused_workspace  $bar-2             $bar-2             $bar-1
+		inactive_workspace $bar-1   	      $bar-1             $bar-2
+		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+
+		}
+}

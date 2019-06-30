@@ -1,0 +1,49 @@
+[icons]
+name = "awesome"
+
+[icons.overrides]
+time = ""
+bat_full = ""
+
+[theme]
+name = "plain"
+[theme.overrides]
+idle_fg = "#FFFFFF"
+separator = "   "
+info_fg = "#FFFFFF"
+good_fg = "#FFFFFF"
+
+idle_bg = "#0b0a16"
+info_bg = "#0b0a16"
+good_bg = "#0b0a16"
+warning_bg = "#0b0a16"
+critical_bg = "#0b0a16"
+separator_bg = "#0b0a16"
+
+[[block]]
+block = "music"
+marquee = false
+max_width = 30
+buttons = ["prev", "play", "next"]
+
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{Mup}%"
+format_swap = "{SUp}%"
+
+[[block]]
+block = "cpu"
+interval = 1
+
+[[block]]
+block = "battery"
+interval = 5
+format = "{percentage}%"
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %F %H:%M"
+

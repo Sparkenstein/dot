@@ -2,7 +2,7 @@
 # urxvt TERM fix
 export TERM=linux
 
-export PATH="$PATH:/home/spark/bin/"
+export PATH="$PATH:/home/prabhanjan/bin/"
 export PATH="$PATH:/home/spark/Downloads/flutter/bin/"
 # export PATH="$PATH:/home/spark/Android/Sdk/platform-tools"
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
