@@ -20,11 +20,6 @@ warning_bg = "#0b0a16"
 critical_bg = "#0b0a16"
 separator_bg = "#0b0a16"
 
-[[block]]
-block = "music"
-marquee = false
-max_width = 30
-buttons = ["prev", "play", "next"]
 
 
 [[block]]
@@ -37,13 +32,17 @@ format_swap = "{SUp}%"
 block = "cpu"
 interval = 1
 
-[[block]]
-block = "battery"
-interval = 5
-format = "{percentage}%"
 
 [[block]]
 block = "time"
 interval = 60
 format = "%a %F %H:%M"
 
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "load"
+interval = 1
+format = "{1m}"

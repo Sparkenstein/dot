@@ -3,6 +3,7 @@
 # ~/.xinitrc
 #
 # Executed by startx (run your window manager from here)
+export PATH=$PATH:/home/spark/bin
 
 # don't know what this does :P
 if [ -d /etc/X11/xinit/xinitrc.d ]; then
@@ -13,7 +14,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
 fi
 
 # start with background
-# feh --bg-fill /home/spark/backgrounds/wallhaven-636345.jpg
+feh --bg-fill /home/spark/Pictures/wallhaven-136vkv.png
 
 ### X options
 
@@ -38,8 +39,9 @@ urxvtd -q -o -f
 compton -b
 dunst &
 # exec polybar example &
-# exec 2bwm
-exec i3
+exec 2bwm &
+# exec i3
+# exec xfce4-panel &
 # exec gnome-session
 # exec startkde
 # exec startxfce4
