@@ -6,32 +6,32 @@ time = ""
 bat_full = ""
 
 [theme]
-name = "plain"
-[theme.overrides]
-idle_fg = "#FFFFFF"
-separator = "   "
-info_fg = "#FFFFFF"
-good_fg = "#FFFFFF"
+name = "modern"
 
-idle_bg = "#0b0a16"
-info_bg = "#0b0a16"
-good_bg = "#0b0a16"
-warning_bg = "#0b0a16"
-critical_bg = "#0b0a16"
-separator_bg = "#0b0a16"
+[theme.overrides]
+separator_bg = "#222D32"
+# separator_fg = "#FF00FF"
 
 
 
 [[block]]
 block = "memory"
 display_type = "memory"
-format_mem = "{Mup}%"
-format_swap = "{SUp}%"
+format_mem = "{Mum}MB"
+# format_swap = "{SUp}%"
 
 [[block]]
 block = "cpu"
 interval = 1
+format = "{utilization} @ {frequency}"
 
+[[block]]
+block = "disk_space"
+path = "/"
+alias = "/"
+info_type = "used"
+unit = "GiB"
+format = "{icon}{used}/{total} {unit}"
 
 [[block]]
 block = "time"
@@ -41,6 +41,8 @@ format = "%a %F %H:%M"
 
 [[block]]
 block = "sound"
+max_vol = 200
+step_width = 1
 
 [[block]]
 block = "load"
