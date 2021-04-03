@@ -35,10 +35,7 @@ table.insert(mykeys, { key = "H", mods = "LEADER|SHIFT", action=wezterm.action{A
 table.insert(mykeys, { key = "J", mods = "LEADER|SHIFT", action=wezterm.action{AdjustPaneSize={"Down", 5}}})
 table.insert(mykeys, { key = "K", mods = "LEADER|SHIFT", action=wezterm.action{AdjustPaneSize={"Up", 5}}})
 table.insert(mykeys, { key = "L", mods = "LEADER|SHIFT", action=wezterm.action{AdjustPaneSize={"Right", 5}}})
-
---        { key = "J", mods = "LEADER|SHIFT", action=wezterm.action{AdjustPaneSize={"Down", 5}}},
---        { key = "K", mods = "LEADER|SHIFT", action=wezterm.action{AdjustPaneSize={"Up", 5}}},
---        { key = "L", mods = "LEADER|SHIFT", action=wezterm.action{AdjustPaneSize={"Right", 5}}},
+table.insert(mykeys, { key = "K", mods = "CTRL|SHIFT",   action=wezterm.action{ClearScrollback="ScrollbackAndViewport"}})
 
 return {
   -- Fonts
@@ -54,7 +51,7 @@ return {
         brightness = 0.6,
   },
   -- UI
-  color_scheme = "Dracula+",
+  color_scheme = "Galaxy",
 
   -- Keybindings
   leader = { key = "m", mods="CTRL" },
