@@ -27,10 +27,10 @@ format = "{utilization} @ {frequency}"
 
 [[block]]
 block = "disk_space"
-path = "/"
+path = "/home/spark"
 alias = "/"
 info_type = "used"
-unit = "GiB"
+unit = "GB"
 format = "{icon}{used}/{total} {unit}"
 
 [[block]]
