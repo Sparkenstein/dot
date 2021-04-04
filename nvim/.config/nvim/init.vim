@@ -1,232 +1,230 @@
-" Plugins
-if &compatible
-	set nocompatible
-endif
-" Add the dein installation directory into runtimepath
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+call plug#begin()
 
-if dein#load_state('~/.cache/dein')
-	call dein#begin('~/.cache/dein')
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-	call dein#add('~/.cache/dein')
-	call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
-	call dein#add('farmergreg/vim-lastplace')
-	call dein#add('ntpeters/vim-better-whitespace')
-	call dein#add('tpope/vim-repeat', { 'on_map' : '.'})
-	call dein#add('tpope/vim-surround', { 'on_map': {'n' : ['cs', 'ds', 'ys'], 'x' : 'S'}, 'depends' : 'vim-repeat'})
-	call dein#add('jiangmiao/auto-pairs')
-	call dein#add('tpope/vim-unimpaired')
-	call dein#add('scrooloose/nerdcommenter')
-	call dein#add('mbbill/undotree', {'on_cmd': ['UndotreeToggle']})
+Plug 'junegunn/fzf'
+Plug 'rust-lang/rust.vim'
 
-  "" language
-  call dein#add('sheerun/vim-polyglot')
+" Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'joshdick/onedark.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'itchyny/lightline.vim'
+" FZF
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
-	"" fuzzy finder
-	call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
-	call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+Plug 'dense-analysis/ale'
 
-	"" color
-	call dein#add('dylanaraps/wal.vim')
+call plug#end()
 
-	call dein#end()
-	call dein#save_state()
-endif
+let g:lightline = {
+  \ 'colorscheme': 'onedark',
+  \ 'active': {
+  \ 'left': [ [ 'mode', 'paste' ],
+  \           [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+  \ },
+  \ 'component_function': {
+  \   'cocstatus': 'coc#status'
+  \ },
+  \ }
 
-if dein#check_install()
-	call dein#install()
-endif
+let g:ale_linters = {'rust': ['analyzer']}
 
-""" Coloring
-syntax on
+" Theme
 set background=dark
-colorscheme wal
+set termguicolors
+colorscheme onedark
 
-""" Other Configurations
+" Customization
+syntax enable
+
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set ignorecase
+set smartcase
 filetype plugin indent on
-set tabstop=2 softtabstop=2 shiftwidth=2 noexpandtab smarttab autoindent
-set incsearch ignorecase smartcase hlsearch
-set ruler laststatus=2 noshowcmd noshowmode
-set nobackup nowritebackup noswapfile
-set dir=/tmp
-set hidden
+set smartindent
 set wildmenu
-set wrap breakindent
-set encoding=utf-8
+set wildmode=full
+set foldmethod=indent
+set foldenable
+set foldlevelstart=10
+set foldnestmax=10
+set splitright
+set splitbelow
+set backspace=indent,eol,start
+set nowrap
+set nohlsearch
+set colorcolumn=120
+set noshowmode
+set showcmd
+
 set number
 set title
+set encoding=utf-8
+set hidden
+set wrap breakindent
+set ruler laststatus=2 
+set incsearch hlsearch
 
-" Search mappings: These will make it so that going to the next one in a
-" search will center on the line it's found in.
-""" statusline
-let g:currentmode={
-			\ 'n'  : 'NORMAL ',
-			\ 'no' : 'N·OPERATOR PENDING ',
-			\ 'v'  : 'VISUAL ',
-			\ 'V'  : 'V·LINE ',
-			\ 'vv' : 'V·BLOCK ',
-			\ 's'  : 'SELECT ',
-			\ 'S'  : 'S·LINE ',
-			\ 'ss' : 'S·BLOCK ',
-			\ 'i'  : 'INSERT ',
-			\ 'R'  : 'REPLACE ',
-			\ 'Rv' : 'V·REPLACE ',
-			\ 'c'  : 'COMMAND ',
-			\ 'cv' : 'VIM EX ',
-			\ 'ce' : 'EX ',
-			\ 'r'  : 'PROMPT ',
-			\ 'rm' : 'MORE ',
-			\ 'r?' : 'CONFIRM ',
-			\ '!'  : 'SHELL ',
-			\ 't'  : 'TERMINAL '}
+" Custom key bindings
+set wildignore+=*/target/*,*/tmp/*,*.swp,*.pyc,*__pycache__/*,*/node_modules/*
 
-" Function: return current mode
-" abort -> function will abort soon as error detected
-function! ModeCurrent() abort
-	let l:modecurrent = mode()
-	" use get() -> fails safely, since ^V doesn't seem to register
-	" 3rd arg is used when return of mode() == 0, which is case with ^V
-	" thus, ^V fails -> returns 0 -> replaced with 'V Block'
-	let l:modelist = toupper(get(g:currentmode, l:modecurrent, 'V·Block '))
-	let l:current_status_mode = l:modelist
-	return l:current_status_mode
+nmap <C-h> :vertical resize -4<CR>
+nmap <C-l> :vertical resize +4<CR>
+nmap <C-k> :resize +4<CR>
+nmap <C-j> :resize -4<CR>
+
+" -----------------------------------------------------------------------------
+"     - Grepping -
+"     Grepping with ripgrep.
+"     If you don't have ripgrep installed you are in trouble!
+" -----------------------------------------------------------------------------
+set grepprg=rg\ --vimgrep
+
+function RipGrepping(search_term)
+    silent! exe 'grep! -i -F "' . a:search_term . '"'
+    redraw!
+    if len(getqflist()) > 0 
+        :copen
+    endif
+endfunction
+command! -nargs=* Find call RipGrepping(<q-args>)
+
+" Finder
+nmap <C-f> :Find
+
+" fuzzy finder
+nmap <C-p> :FZF<cr>
+
+:let mapleader = "\<Space>"
+
+
+" CoC specific stuff
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-hi PrimaryBlock   ctermfg =00 ctermbg=03
-hi SecondaryBlock ctermfg =07 ctermbg=10
-hi Blanks         ctermfg =07 ctermbg=0
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
 
-highlight EndOfBuffer ctermfg=black ctermbg=black
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-set statusline=
-set statusline+=%#PrimaryBlock#
-set statusline+=\ %{ModeCurrent()}
-set statusline+=%#SecondaryBlock#
-set statusline+=%{StatuslineGit()}
-set statusline+=%#Blanks#
-set statusline+=\ %t\ 
-set statusline+=%(%m%)
-set statusline+=%=
-set statusline+=%#SecondaryBlock#
-set statusline+=\ Ln
-set statusline+=\ %l
-set statusline+=,Col
-set statusline+=\ %c\ 
-set statusline+=%#PrimaryBlock#
-set statusline+=\ %Y\ 
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-function! GitBranch()
-	return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
 endfunction
 
-function! StatuslineGit()
-	let l:branchname = GitBranch()
-	return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-endfunction
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
-""" Custom Mappings
-let mapleader=";"
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
 
-" search mapping
-nmap n :norm! nzzzv<CR>
-nmap N :norm! Nzzzv<CR>
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
-" Fast saving
-nmap <leader>w :w!<cr>
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
 
-"" Disable arrow keys
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-"" Split
-noremap <Leader>h :<C-u>split<CR>
-noremap <Leader>v :<C-u>vsplit<CR>
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
 
-"" Tabs
-nnoremap <Tab> gt
-nnoremap <S-Tab> gT
-nnoremap <silent> <S-t> :tabnew<CR>
 
-"" Set working directory
-nnoremap <leader>. :lcd %:p:h<CR>
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
 
-"" Opens an edit command with the path of the currently edited file filled in
-noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of language server.
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
 
-"" Opens a tab edit command with the path of the currently edited file filled
-noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
 
-" Disable visualbell
-set noerrorbells visualbell t_vb=
-if has('autocmd')
-	autocmd GUIEnter * set visualbell t_vb=
-endif
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
-"" Copy/Paste/Cut
-set clipboard=unnamed,unnamedplus
-noremap YY "+y<CR>
-noremap <leader>p "+gP<CR>
-noremap XX "+x<CR>
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-"" Buffer nav
-noremap <leader>z :bp<CR>
-noremap <leader>q :bp<CR>
-noremap <leader>x :bn<CR>
-noremap <leader>w :bn<CR>
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
-"" Close buffer
-noremap <leader>c :bd<CR>
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-"" Clean search (highlight)
-nnoremap <silent> <leader><space> :noh<cr>
-
-"" Switching windows
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-noremap <C-h> <C-w>h
-
-"" Vmap for maintain Visual Mode after shifting > and <
-vmap < <gv
-vmap > >gv
-
-"" Move visual block
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-
-"" fzf
-nnoremap <leader>b :Buffers<cr>
-nnoremap <leader>c :History:<cr>
-nnoremap <leader>f :Files<cr>
-nnoremap <leader>g :GFiles<cr>
-nnoremap <leader>j :History<cr>
-nnoremap <leader>l :Lines<cr>
-nnoremap <leader>m :Maps<cr>
-nnoremap <leader>r :Ag<cr>
-
-""" Plugin Configurations
-
-" Undotree
-if has("persistent_undo")
-	set undodir=~/.undodir/
-	set undofile
-endif
-
-" fzf colors
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-\ 'header': ['fg', 'Comment'] }
-
+" yank
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
