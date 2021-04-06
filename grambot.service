@@ -1,0 +1,15 @@
+[Unit]
+Description=Grambot
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+Restart=on-failure
+User=spark
+WorkingDirectory=/home/spark/p/grambot
+ExecStart=/usr/bin/pipenv run python -m userbot
+
+[Install]
+WantedBy=multi-user.target
+
