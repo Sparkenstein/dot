@@ -45,7 +45,7 @@ table.insert(mykeys, { key = "K", mods = "CTRL|SHIFT",   action=wezterm.action{C
 
 return {
   -- Fonts
-  font = wezterm.font("FantasqueSansMono Nerd Font"),
+  font = wezterm.font("Iosevka SS05"),
   font_size = 15.0,
   line_height = 1.2,
 
@@ -54,10 +54,10 @@ return {
   inactive_pane_hsb = {
         hue = 1.0,
         saturation = 0.7,
-        brightness = 0.6,
+        brightness = 0.8,
   },
   -- UI
-  color_scheme = "Galaxy",
+  color_scheme = "JetBrains Darcula",
 
   -- Keybindings
   leader = { key = "m", mods="CTRL" },
