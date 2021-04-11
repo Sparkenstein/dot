@@ -14,6 +14,7 @@ Plug 'itchyny/lightline.vim'
 " FZF
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'metakirby5/codi.vim'
 
 Plug 'dense-analysis/ale'
 
@@ -61,7 +62,8 @@ set nohlsearch
 set colorcolumn=120
 set noshowmode
 set showcmd
-
+set timeout
+set timeoutlen=500
 set number
 set title
 set encoding=utf-8
@@ -78,24 +80,8 @@ nmap <C-l> :vertical resize +4<CR>
 nmap <C-k> :resize +4<CR>
 nmap <C-j> :resize -4<CR>
 
-" -----------------------------------------------------------------------------
-"     - Grepping -
-"     Grepping with ripgrep.
-"     If you don't have ripgrep installed you are in trouble!
-" -----------------------------------------------------------------------------
-set grepprg=rg\ --vimgrep
-
-function RipGrepping(search_term)
-    silent! exe 'grep! -i -F "' . a:search_term . '"'
-    redraw!
-    if len(getqflist()) > 0 
-        :copen
-    endif
-endfunction
-command! -nargs=* Find call RipGrepping(<q-args>)
-
-" Finder
-nmap <C-f> :Find
+" ESCAPEEEEE
+:imap jk <Esc>
 
 " fuzzy finder
 nmap <C-p> :FZF<cr>
