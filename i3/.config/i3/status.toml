@@ -1,16 +1,8 @@
 [icons]
-name = "awesome"
-
-[icons.overrides]
-time = ""
-bat_full = ""
+name = "material"
 
 [theme]
-name = "modern"
-
-[theme.overrides]
-separator_bg = "#222D32"
-# separator_fg = "#FF00FF"
+name = "slick"
 
 
 
@@ -38,10 +30,8 @@ block = "time"
 interval = 60
 format = "%a %F %H:%M"
 
-
 [[block]]
 block = "sound"
-max_vol = 200
 step_width = 1
 
 [[block]]
