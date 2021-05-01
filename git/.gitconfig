@@ -15,9 +15,8 @@
 [user]
 	email = 24642451+Sparkenstein@users.noreply.github.com
 	name = Sparkenstein
-	signingkey = 1F3155A847E3E6C0
 [commit]
-	gpgSign = true
+	gpgsign = false
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
