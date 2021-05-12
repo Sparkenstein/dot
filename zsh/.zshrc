@@ -1,6 +1,10 @@
 # zplug
 source ~/.zplug/init.zsh
 
+export fpath=(~/.zsh $fpath)
+autoload -U compinit && compinit
+
+export GPG_TTY=$(tty)
 # Env Variables
 export PATH="$PATH:$HOME/bin/"
 export PATH=/home/spark/.fnm:$PATH
