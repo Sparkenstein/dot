@@ -18,11 +18,14 @@ hide_edge_borders none
 bindsym Mod1+Tab workspace next
 bindsym Mod1+Shift+Tab workspace prev
 
-# betterlockscreen
-bindsym $mod+shift+x exec betterlockscreen -l dim
+# polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh --forest
 
 # set wallpaper
 exec --no-startup-id feh --bg-fill --randomize ~/Pictures/*
+
+# start picom
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
 
 # change borders
 bindsym $mod+u border none
@@ -46,7 +49,7 @@ bindsym $mod+Shift+q kill
 
 # start program launcher
 # bindsym $mod+d exec --no-startup-id dmenu_recency
-bindsym $mod+d exec "rofi -combi-modi drun -show combi -modi combi"
+bindsym $mod+d exec "rofi -no-config -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar/forest/scripts/rofi/launcher.rasi"
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -321,18 +324,19 @@ set $bar-1 "#0b0a16"
 set $bar-2 "#ffffff"
 
 
-bar {
-	font pango:JetBrains Mono, Font Awesome 5 Free
-	strip_workspace_numbers yes
-	position bottom 
-	status_command i3status-rs ~/.config/i3/status.toml
-	colors {
-            separator #666666
-            background #222222
-            statusline #dddddd
-            focused_workspace #0088CC #0088CC #ffffff
-            active_workspace #333333 #333333 #ffffff
-            inactive_workspace #333333 #333333 #888888
-            urgent_workspace #2f343a #900000 #ffffff
-		}
-}
+# bar {
+# 	font pango:JetBrains Mono, Font Awesome 5 Free
+# 	strip_workspace_numbers yes
+# 	position bottom 
+# 	# status_command i3status-rs ~/.config/i3/status.toml
+#     status_command i3blocks
+# 	colors {
+#             separator #666666
+#             background #222222
+#             statusline #dddddd
+#             focused_workspace #0088CC #0088CC #ffffff
+#             active_workspace #333333 #333333 #ffffff
+#             inactive_workspace #333333 #333333 #888888
+#             urgent_workspace #2f343a #900000 #ffffff
+# 		}
+# }
