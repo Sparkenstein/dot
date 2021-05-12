@@ -10,26 +10,18 @@ Plug 'joshdick/onedark.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " FZF
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'metakirby5/codi.vim'
+Plug 'jiangmiao/auto-pairs'
 
 Plug 'dense-analysis/ale'
 
 call plug#end()
 
-let g:lightline = {
-  \ 'colorscheme': 'onedark',
-  \ 'active': {
-  \ 'left': [ [ 'mode', 'paste' ],
-  \           [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-  \ },
-  \ 'component_function': {
-  \   'cocstatus': 'coc#status'
-  \ },
-  \ }
 
 let g:ale_linters = {'rust': ['analyzer']}
 
@@ -82,7 +74,7 @@ nmap <C-j> :resize -4<CR>
 
 " ESCAPEEEEE
 :imap jk <Esc>
-
+:imap <M-Space> <Esc>
 " fuzzy finder
 nmap <C-p> :FZF<cr>
 
@@ -192,7 +184,6 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 " Mappings for CoCList
 " Show all diagnostics.
@@ -214,3 +205,7 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " yank
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+
+autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+
